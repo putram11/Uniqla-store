@@ -1,53 +1,73 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=15639970&assignment_repo_type=AssignmentRepo)
-# My eCommerce App
+# Uniqla Store
 
-## Tujuan Pembelajaran
+## Introduction
 
-- Student mampu membuat aplikasi server dengan menggunakan menggunakan Typescript, NEXT.js dan melakukan proses CRUD dengan database MongoDB
-- Student mampu membuat web aplikasi dengan menggunakan framework NEXT.js
-- Student mampu menghandle navigasi pada NEXT.js
-- Student mampu menghandle authentikasi pada NEXT.js
-- Student mampu mengimplementasikan CSR & SSR pada NEXT.js
+**Uniqla Store** is a full-stack eCommerce web application built with **TypeScript**, **Next.js**, and **MongoDB**. This project is designed to provide a seamless shopping experience, where users can explore products, search for items, manage their wishlist, and handle user authentication through registration and login. It serves as a modern, feature-rich platform, demonstrating advanced web development practices, making it an excellent addition to your portfolio.
 
-## Aturan Umum
+## Features
 
-Challenge Hacktiv8 bersifat latihan WAJIB yang menjunjung tinggi INTEGRITAS. Segala bentuk ketidakjujuran meliputi peniruan, plagiarisme, pemalsuan pengerjaan akan mendapatkan tindakan tegas dari akademik.
+The Uniqla Store offers a variety of features to ensure an optimal shopping experience:
 
-Untuk melatih best practice di lapangan kerja, student diharuskan untuk melakukan git commit minimal 1 hari 4 kali dengan message yang deskriptif atau commit message yang sesuai
+### 1. **User Authentication**
+   - **Register Page**: Users can create a new account.
+   - **Login Page**: Registered users can log in to access their account and wishlist.
+   - **Secure Authentication**: Optionally, **NextAuth.js** can be implemented to provide secure user authentication.
 
-## Ringkasan
+### 2. **Home Page**
+   - **Promotional Banner**: A section for displaying special offers and promotional deals.
+   - **Store Information**: Brief details about Uniqla Store’s mission and values.
+   - **Featured Products**: A section showcasing 5 to 10 highlighted products with a "See All" link for further exploration.
 
-My eCommerce App adalah sebuah web aplikasi yang dibangun menguunakan Typescript , framework NEXT.js dan database MongoDB, jadi kerjakan dengan baik sebagai bekal portofolio kamu.
+### 3. **Product Pages**
+   - **Product List Page**: Displays all available products with the following features:
+     - **Search Functionality**: Users can search for products by name, using **debounce** to improve search performance.
+     - **Infinite Scroll**: Automatically loads more products as the user scrolls down the page.
+   - **Product Detail Page**: Provides detailed information about a specific product, including images, descriptions, and prices.
+     - **Add to Wishlist**: Users can easily add products to their wishlist for future reference.
 
-Pada challenge ini, kamu diminta untuk membuat aplikasi client-server dengan detail sebagai berikut:
+### 4. **Wishlist Management**
+   - **Wishlist Page**: Displays all products that a user has added to their wishlist.
+   - **Remove from Wishlist**: Users can remove products from their wishlist at any time.
 
-### Halaman
+### 5. **SEO & Meta Tags**
+   - **Dynamic Meta Tags**: Each product detail page is optimized for search engines with dynamic meta tags to improve SEO and product discoverability.
 
-- [ ] Halaman Register
-- [ ] Halaman Login
-- [ ] Halaman Home
-  - [ ] Banner Promo
-  - [ ] Detail info Ecommerce
-  - [ ] Featured Product (5-10 product) + “see-all”
-- [ ] Halaman Product
-- [ ] List Product
-  - [ ] Fitur Search
-  - [ ] Fitur Pagination (menggunakan infinite scroll)
-  - [ ] Fitur Add to wishlist
-- [ ] Halaman Detail Product
-  - [ ] Fitur Add to wishlist
-  - [ ] Implementasi Meta Tag di Head sesuai detail product
-- [ ] Halaman Wishlist Product
-  - [ ] List Wishlist
-  - [ ] Fitur Remove Wishlist
+## Technologies Used
 
-### Fitur
+### Frontend
+- **Next.js**: A powerful React-based framework that supports server-side rendering (SSR) and static site generation (SSG) to improve performance and SEO.
+- **TypeScript**: Adds static typing to JavaScript, ensuring better code maintainability and fewer errors.
+- **SCSS/CSS Modules**: For styling the user interface and ensuring that the app is responsive across different devices.
 
-- [ ] Fitur register
-- [ ] Fitur login
-- [ ] Fitur show list product
-- [ ] Fitur show detail product
-- [ ] Fitur add to wishlist
-- [ ] Fitur remove wishlist
-- [ ] Fitur search product berdasarkan nama (implement menerapkan debounce)
-- [ ] Fitur pagination (implement infinite scroll)
+### Backend
+- **MongoDB**: A NoSQL database used to store product information, user data, and wishlist items.
+- **Next.js API Routes**: Provides a convenient way to handle server-side logic and interact with the MongoDB database.
+- **Mongoose**: A library that simplifies database interactions and helps structure the MongoDB data.
+
+### Additional Libraries & Tools
+- **Axios / Fetch API**: Used to make API calls between the client and server.
+- **NextAuth.js** (optional): Handles secure user authentication and session management.
+- **Debounce**: Optimizes the search function to avoid unnecessary API requests while typing.
+
+### User Interface
+- **Responsive Design**: Ensures that the app is fully responsive, providing a great user experience across devices including desktops, tablets, and smartphones.
+
+## Core Features Overview
+
+- **Authentication**: Secure registration and login functionality to personalize the user experience.
+- **Home Page**: Displays a promotional banner, store information, and featured products for easy browsing.
+- **Product Browsing**: Includes a product list page with search functionality, infinite scroll, and detailed product pages.
+- **Wishlist**: Allows users to add products to a wishlist and remove them as needed.
+
+## Future Enhancements
+
+To further improve the user experience, the following features can be added:
+
+- **Shopping Cart & Checkout**: A complete shopping cart system integrated with a payment gateway (e.g., Stripe, PayPal).
+- **User Reviews & Ratings**: Enable users to leave reviews and rate products.
+- **Order History**: Provide users with a section to view their past orders.
+- **Admin Dashboard**: Build an admin panel for managing products, user accounts, and orders.
+
+## Conclusion
+
+**Uniqla Store** is a modern eCommerce platform that demonstrates the use of cutting-edge technologies like **Next.js**, **TypeScript**, and **MongoDB**. It offers a complete user experience with product browsing, wishlist management, and secure authentication, making it an ideal project for showcasing your web development skills.
