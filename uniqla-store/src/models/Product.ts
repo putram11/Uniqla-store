@@ -1,4 +1,3 @@
-// models/productModel.ts
 import { connectDB } from '../db/config';
 import { ObjectId, Collection } from 'mongodb';
 
@@ -23,25 +22,42 @@ const getCollection = async (): Promise<Collection<Product>> => {
   return db.collection<Product>('products'); // Ensure the type is explicitly assigned to Product
 };
 
-// Fetch all products with pagination
-export const getAllProducts = async (page: number = 1, limit: number = 8, query: string = ''): Promise<Product[]> => {
+// Fetch all products with pagination and search
+export const getAllProducts = async (
+  page: number = 1,
+  limit: number = 8,
+  query: string = ''
+): Promise<{ data: Product[], totalProducts: number }> => {
   const collection = await getCollection();
   const skip = (page - 1) * limit;
-  const searchRegex = new RegExp(query, 'i'); 
+  const searchRegex = new RegExp(query, 'i');
 
   try {
-    return await collection.find({ name: { $regex: searchRegex } }).skip(skip).limit(limit).toArray();
+    const queryFilter = { name: { $regex: searchRegex } };
+    
+    // Get the total count of matching products
+    const totalProducts = await collection.countDocuments(queryFilter);
+
+    // Fetch the products with pagination
+    const products = await collection
+      .find(queryFilter)
+      .skip(skip)
+      .limit(limit)
+      .toArray();
+
+    return { data: products, totalProducts };
   } catch (error) {
     console.error('Error fetching all products:', error);
     throw new Error('Failed to fetch products');
   }
 };
 
-
+// Fetch a limited number of products for the homepage
 export const getHomepageProducts = async (): Promise<Product[]> => {
   const collection = await getCollection();
 
   try {
+    // Only fetch essential fields if needed, e.g. name, price, thumbnail, etc.
     return await collection.find().limit(4).toArray();
   } catch (error) {
     console.error('Error fetching homepage products:', error);
@@ -49,6 +65,7 @@ export const getHomepageProducts = async (): Promise<Product[]> => {
   }
 };
 
+// Fetch a product by its slug
 export const getProductBySlug = async (slug: string): Promise<Product | null> => {
   const collection = await getCollection();
 
@@ -59,3 +76,4 @@ export const getProductBySlug = async (slug: string): Promise<Product | null> =>
     throw new Error('Failed to fetch product');
   }
 };
+
