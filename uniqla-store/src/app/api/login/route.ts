@@ -1,30 +1,50 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyUserCredentials, makeToken } from '../../../models/User';
-import { cookies } from 'next/headers'; 
+import { cookies } from 'next/headers';
 
 export async function POST(req: NextRequest) {
   try {
     const { email, password } = await req.json();
 
-    const user = await verifyUserCredentials(email, password);
-    if (!user) {
-      return NextResponse.json({ message: 'Invalid credentials' }, { status: 401 });
+    // Validate input
+    if (!email || !password) {
+      return NextResponse.json(
+        { message: 'Email and password are required' },
+        { status: 400 }
+      );
     }
 
+    // Check user credentials
+    const user = await verifyUserCredentials(email, password);
+    if (!user) {
+      return NextResponse.json(
+        { message: 'Invalid email or password' },
+        { status: 401 }
+      );
+    }
+
+    // Generate token
     const token = makeToken(user._id);
 
-
-    const cookieStore = cookies();
-    cookieStore.set('authToken', token, {
+    // Set auth token as an HTTP-only, secure cookie
+    const response = NextResponse.json(
+      { message: 'Login successful' },
+      { status: 200 }
+    );
+    response.cookies.set('authToken', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      maxAge: 60 * 60 * 24 * 7, 
+      sameSite: 'strict',
+      maxAge: 60 * 60 * 24 * 7, // 7 days
       path: '/',
     });
 
-    return NextResponse.json({ message: 'Login successful' }, { status: 200 });
+    return response;
   } catch (error) {
-    console.error('Error logging in:', error);
-    return NextResponse.json({ message: 'Login failed' }, { status: 500 });
+    console.error('Error during login:', error);
+    return NextResponse.json(
+      { message: 'An error occurred. Please try again.' },
+      { status: 500 }
+    );
   }
 }
